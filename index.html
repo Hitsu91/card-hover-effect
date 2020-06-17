@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Indicator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="grid">
+        <div id="marker"></div>
+        <div id="box-1" class="box">
+            <h2>Text Title</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, eius sint impedit numquam optio
+                quibusdam id alias at placeat, iusto sequi praesentium! Fugit mollitia rerum voluptate reiciendis
+                assumenda iusto est.
+            </p>
+        </div>
+        <div id="box-2" class="box">
+            <h2>Text Title</h2>
+            <p>Repellat, harum iste. Molestiae voluptatem ea quam omnis nobis! Expedita, sunt consequatur? Pariatur
+                minima adipisci obcaecati! Nam assumenda magnam vero dolore voluptas aperiam perferendis cumque maxime
+                eum, sunt nulla! Eligendi.</p>
+        </div>
+        <div id="box-3" class="box">
+            <h2>Text Title</h2>
+            <p>Obcaecati error, pariatur commodi autem ad maiores, perferendis, voluptatibus amet inventore tempore
+                optio! Dolor, dicta corrupti. Molestiae, culpa? Voluptatibus voluptatem assumenda illum vero accusamus
+                ipsum numquam cumque error doloremque quas.</p>
+        </div>
+        <div id="box-4" class="box">
+            <h2>Text Title</h2>
+            <p>Tempora, qui? Odio corporis sapiente perferendis aspernatur voluptatibus vero fugiat, vitae dicta illo
+                omnis harum. Distinctio vero placeat voluptatum rem quis fugiat suscipit molestias perferendis? In
+                labore nesciunt error magni.</p>
+        </div>
+        <div id="box-5" class="box">
+            <h2>Text Title</h2>
+            <p>Architecto ipsa impedit perspiciatis, dolorum ex amet, a fugiat quis nobis recusandae dolor sint?
+                Consequuntur, magni assumenda minima magnam veniam, vitae ex nihil dolore beatae commodi, veritatis et
+                corrupti exercitationem.</p>
+        </div>
+        <div id="box-6" class="box">
+            <h2>Text Title</h2>
+            <p>Tempora molestiae quam ducimus exercitationem asperiores itaque, quaerat ut inventore dolores distinctio
+                sit rem corporis, hic molestias, eius aliquid fuga fugit at! Excepturi quidem vel sint molestias a
+                deleniti quasi?</p>
+        </div>
+        <div id="box-7" class="box">
+            <h2>Text Title</h2>
+            <p>Amet voluptatem ab laborum? Ducimus alias sequi quidem rem modi quas quasi consequuntur earum aliquam
+                laboriosam blanditiis voluptatum non accusantium iste a aspernatur iusto similique expedita perspiciatis
+                delectus, fugiat asperiores.</p>
+        </div>
+        <div id="box-8" class="box">
+            <h2>Text Title</h2>
+            <p>Minus totam, dicta asperiores veniam, quisquam quidem iusto quaerat modi incidunt, cum accusamus harum
+                deleniti. Magnam, delectus tempore officia ipsam maxime laborum harum sint exercitationem quasi incidunt
+                temporibus, inventore possimus?</p>
+        </div>
+    </div>
+    <script>
+        const marker = document.querySelector('#marker');
+        const boxes = document.querySelectorAll('.grid > .box');
+        let lastTarget;
+        let timer;
+
+        function active(e) {
+            let target = e.target;
+            if (target.classList[0] != "box") {
+                target = target.parentNode;
+            }
+            lastTarget = target;
+            setMarketStyle();
+        }
+
+        boxes.forEach(box => {
+            box.addEventListener('click', active);
+        })
+
+        window.onresize = () => {
+            clearTimeout(timer);
+            marker.classList.add('notransition');
+            setMarketStyle();
+            timer = setTimeout(() => {
+                marker.classList.remove('notransition');
+            }, 100);
+        }
+
+        function setMarketStyle() {
+            if (!lastTarget)
+                return;
+            const height = lastTarget.offsetHeight;
+            const width = lastTarget.offsetWidth;
+            const left = lastTarget.offsetLeft;
+            const top = lastTarget.offsetTop;
+
+            marker.style.left = left + "px";
+            marker.style.top = top + "px";
+            marker.style.height = height + "px";
+            marker.style.width = width + "px";
+        }
+
+    </script>
+</body>
+
+</html>
